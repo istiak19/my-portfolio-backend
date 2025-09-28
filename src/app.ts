@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import notFound from "./app/middleware/notFound";
+import { router } from "./app/route";
 
 const app = express();
 
@@ -20,11 +21,11 @@ app.use(
   })
 );
 
-// app.use("/api/v1", router);
+app.use("/api/v1", router);
 
 // Default route for testing
 app.get("/", (req: Request, res: Response) => {
-    res.send("Portfolio Backend API is running successfully!");
+  res.send("Portfolio Backend API is running successfully!");
 });
 
 
