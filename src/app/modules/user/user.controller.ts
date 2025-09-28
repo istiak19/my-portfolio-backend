@@ -4,27 +4,24 @@ import { catchAsync } from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { userService } from './user.service';
 
-const getAllUser = catchAsync(async (req: Request, res: Response) => {
-    const user = await userService.getAllUser();
-    sendResponse(res, {
-        success: true,
-        statusCode: httpStatus.OK,
-        message: "Users retrieved successfully",
-        data: user
-    });
-});
+const loginUser = catchAsync(async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const { user, token } = await userService.loginUser(email, password);
 
-const createUser = catchAsync(async (req: Request, res: Response) => {
-    const user = await userService.createUser(req.body);
-    sendResponse(res, {
-        success: true,
-        statusCode: httpStatus.CREATED,
-        message: "User created successfully",
-        data: user
-    });
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Login successful",
+    data: { user, token }
+  });
 });
 
 export const userController = {
-    getAllUser,
-    createUser,
+   loginUser
 };
