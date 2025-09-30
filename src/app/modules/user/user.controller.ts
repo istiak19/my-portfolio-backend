@@ -22,6 +22,21 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const logoutUser = catchAsync(async (req: Request, res: Response) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Logout successful",
+    data: null,
+  });
+});
+
 export const userController = {
-   loginUser
+  loginUser,
+  logoutUser
 };
