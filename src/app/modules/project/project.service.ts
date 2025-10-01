@@ -10,6 +10,19 @@ const projectCreated = async (payload: any) => {
     return pro;
 };
 
+const getProject = async () => {
+    const pro = await prisma.project.findMany();
+    return pro;
+};
+
+const getByProject = async (id: number) => {
+    const pro = await prisma.project.findUnique({
+        where: { id }
+    });
+
+    return pro;
+};
+
 const projectDelete = async (id: number) => {
     const pro = await prisma.project.delete({
         where: { id }
@@ -20,5 +33,7 @@ const projectDelete = async (id: number) => {
 
 export const projectService = {
     projectCreated,
+    getProject,
+    getByProject,
     projectDelete
 };
