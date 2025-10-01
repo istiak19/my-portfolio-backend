@@ -26,3 +26,19 @@ model User {
 enum Role {
   Admin
 }
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String
+  image        String
+  technologies String
+  description  String
+  challenges   String
+  improvements String
+  clientLink   String
+  serverLink   String
+  liveLink     String
+  features     String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
