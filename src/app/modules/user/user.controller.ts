@@ -3,29 +3,31 @@ import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { userService } from './user.service';
+import { userCreateToken } from '../../utils/userCreateToken';
+import { setCookies } from '../../utils/setCookies';
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  const { user, token } = await userService.loginUser(email, password);
+  const user = await userService.loginUser(email, password);
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+  const userTokens = await userCreateToken(user);
+  setCookies(res, userTokens);
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: "Login successful",
-    data: { user, token }
+    data: { user, accessToken: userTokens.accessToken }
   });
 });
 
 const logoutUser = catchAsync(async (req: Request, res: Response) => {
-  res.clearCookie("token", {
+  res.cookie("accessToken", "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
+    sameSite: "none",
+    maxAge: 0,
+    path: "/"
   });
 
   sendResponse(res, {

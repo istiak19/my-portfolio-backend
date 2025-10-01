@@ -1,11 +1,5 @@
 export const getAboutInfo = () => {
     return {
-        name: "Istiak Ahamed",
-        email: "istiakanik79@gmail.com",
-        phone: "+8801794270067",
-        whatsappTelegram: "+8801794270067",
-        location: "Dhaka, Bangladesh",
-
         introduction: `I’m Istiak Ahamed, a passionate and detail-oriented Front-End Developer who loves building modern, responsive, and user-friendly web applications. Always eager to learn new technologies, take on challenges, and deliver impactful digital experiences.`,
 
         skills: {
@@ -33,7 +27,7 @@ export const getAboutInfo = () => {
                 "NextAuth.js",
                 "Firebase",
             ],
-            database: ["MongoDB"],
+            database: ["MongoDB", "PostgreSQL"],
             toolsAndPlatforms: [
                 "Git",
                 "GitHub",
