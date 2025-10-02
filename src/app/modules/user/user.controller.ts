@@ -6,6 +6,19 @@ import { userService } from './user.service';
 import { userCreateToken } from '../../utils/userCreateToken';
 import { setCookies } from '../../utils/setCookies';
 
+const getMeUser = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.params.id;
+
+  const user = await userService.getMeUser(Number(userId));
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Get me user successful",
+    data: user,
+  });
+});
+
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const user = await userService.loginUser(email, password);
@@ -39,6 +52,7 @@ const logoutUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const userController = {
+  getMeUser,
   loginUser,
   logoutUser
 };
