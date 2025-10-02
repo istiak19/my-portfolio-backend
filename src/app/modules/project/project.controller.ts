@@ -15,7 +15,7 @@ const projectCreated = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.CREATED,
-        message: "Project created successful",
+        message: "Project created successfully",
         data: project
     });
 });
@@ -26,7 +26,7 @@ const getProject = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
-        message: "Project get successful",
+        message: "Projects retrieved successfully",
         data: project
     });
 });
@@ -38,7 +38,7 @@ const getByProject = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
-        message: "Project get successful",
+        message: "Project retrieved successfully",
         data: project
     });
 });
@@ -50,7 +50,7 @@ const projectDelete = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
-        message: "Project delete successful",
+        message: "Project deleted successfully",
         data: project
     });
 });
