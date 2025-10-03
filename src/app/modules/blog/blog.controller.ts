@@ -61,6 +61,21 @@ const updateBlog = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const updatePublishBlogById = catchAsync(async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { published } = req.body;
+  const isPublished = published === "true" || published === true;
+
+  const updatedBlog = await blogService.updatePublishBlogById(id, isPublished);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Blog publish status updated successfully",
+    data: updatedBlog,
+  });
+});
+
 const deleteBlog = catchAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     await blogService.deleteBlogById(id);
@@ -78,5 +93,6 @@ export const blogController = {
     getBlog,
     getByBlog,
     updateBlog,
+    updatePublishBlogById,
     deleteBlog
 };
