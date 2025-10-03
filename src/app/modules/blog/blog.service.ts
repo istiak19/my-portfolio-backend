@@ -37,6 +37,15 @@ const updateBlogById = async (id: number, payload: any) => {
     return updatedBlog;
 };
 
+const updatePublishBlogById = async (id: number, published: boolean) => {
+    const updatedBlog = await prisma.blog.update({
+        where: { id },
+        data: { published },
+    });
+
+    return updatedBlog;
+};
+
 const deleteBlogById = async (id: number) => {
     return await prisma.blog.delete({
         where: { id }
@@ -48,5 +57,6 @@ export const blogService = {
     getBlog,
     getByBlog,
     updateBlogById,
+    updatePublishBlogById,
     deleteBlogById
 }; 
