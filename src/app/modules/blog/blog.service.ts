@@ -11,7 +11,11 @@ const blogCreated = async (payload: any) => {
 };
 
 const getBlog = async () => {
-    const blogs = await prisma.blog.findMany();
+    const blogs = await prisma.blog.findMany({
+        orderBy: {
+            createdAt: 'desc',
+        },
+    });
     return blogs;
 };
 
