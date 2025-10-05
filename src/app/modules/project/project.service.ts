@@ -11,8 +11,12 @@ const projectCreated = async (payload: any) => {
 };
 
 const getProject = async () => {
-    const pro = await prisma.project.findMany();
-    return pro;
+    const projects = await prisma.project.findMany({
+        orderBy: {
+            createdAt: 'desc',
+        },
+    });
+    return projects;
 };
 
 const getByProject = async (id: number) => {
