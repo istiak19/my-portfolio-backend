@@ -5,7 +5,7 @@ import { checkAuth } from "../../middleware/checkAuth";
 
 const router = Router();
 
-router.post("/create-project", multerUpload.single("file"), projectController.projectCreated);
+router.post("/create-project", checkAuth(["Admin"]), multerUpload.single("file"), projectController.projectCreated);
 router.get("/", projectController.getProject);
 router.get("/:id", projectController.getByProject);
 router.delete("/:id", projectController.projectDelete);
