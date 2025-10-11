@@ -4,6 +4,7 @@ import express, { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import notFound from "./app/middleware/notFound";
 import { router } from "./app/route";
+import globalErrorHandler from "./app/middleware/globalErrorHandler";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // 404 Handler
+app.use(globalErrorHandler);
 app.use(notFound);
 
 export default app;
