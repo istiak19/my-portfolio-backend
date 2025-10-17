@@ -12,7 +12,11 @@ const app = express();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://istiak.vercel.app"],
+    origin: [
+      "http://localhost:3000",
+      "https://istiak.vercel.app",
+      "https://www.istiakdev.site"
+    ],
     credentials: true,
   })
 );
